@@ -1,0 +1,47 @@
+{
+  "name": "fastify-auth-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "tap test/**/*.test.js --coverage",
+    "test:coverage:lcov": "tap test/**/*.test.js --coverage --coverage-report=text-lcov > lcov.info",
+    "start": "nodemon app.js",
+    "dev": "fastify start -l info -P app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.395.0",
+    "boom": "^7.3.0",
+    "dotenv": "^6.2.0",
+    "fastify": "^1.13.3",
+    "fastify-autoload": "^0.6.0",
+    "fastify-cli": "^0.27.0",
+    "fastify-jwt": "^0.8.0",
+    "fastify-mongodb": "^1.0.0",
+    "fastify-multipart": "^0.6.0",
+    "fastify-plugin": "^1.2.0",
+    "fastify-swagger": "^1.0.0",
+    "fb": "^2.0.0",
+    "mailgun-js": "^0.22.0",
+    "mongo-clean": "^2.0.0",
+    "mustache": "^3.0.1",
+    "nodemon": "^1.18.9",
+    "qs": "^6.6.0",
+    "rxjs": "^6.4.0",
+    "secure-password": "^3.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "lint-staged": "^8.1.1",
+    "mock-require": "^3.0.2",
+    "tap": "^12.0.0"
+  }
+}
