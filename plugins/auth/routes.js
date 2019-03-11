@@ -4,8 +4,7 @@ const securePassword = require("secure-password");
 const DUPLICATE_KEY_ERROR = 11000;
 const helpers = require("../../services/helpers");
 const middleWares = require("../../services/middlewares");
-const {FB, FacebookApiException} = require("fb");
-const request = require("request");
+const {FB} = require("fb");
 const Mailgun = require("mailgun-js");
 const mustache = require("mustache");
 

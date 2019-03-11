@@ -7,13 +7,13 @@ const { mongourl } = require("./config/config");
 const swagger = require("./config/swagger");
 
 //custom plugins
-const AuthMongoJwt = require("./plugins/auth");
+const Authentication = require("./plugins/auth");
 
 fastify.register(require("fastify-swagger"), swagger.options);
 
-fastify.register(AuthMongoJwt, {
+fastify.register(Authentication, {
   auth: {
-    secret: "thisisalongsecretjustfortests"
+    secret: "thisisasomelongsecretcodejustfortests"
   },
   mongodb: {
     url: mongourl,
