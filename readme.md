@@ -2,7 +2,7 @@
 - sign up new user
 - login (only users with confirmed email can login)
 - 'me' endpoint
-- sign up user via Facebook
+- sign up / login user via Facebook
 - email confirmation (email confirmation request and email confirmation using received code)
 
 For installing project: create .env from env.example<br>
