@@ -12,6 +12,18 @@ exports.validatePhoneNumber = phoneNumber => {
   return phoneRe.test(phoneNumber);
 };
 
+exports.readFileAsync = path => {
+  return new Promise(function(resolve, reject) {
+    fs.readFile(path, function(error, result) {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result);
+      }
+    });
+  });
+};
+
 exports.getUserFromToken = async (app, _token) => {
   try {
     const token = _token.split(" ")[1],
