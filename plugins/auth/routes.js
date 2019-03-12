@@ -183,9 +183,18 @@ module.exports = async function (app, opts) {
       beforeHandler: [middleWares.checkEmailConfirmed(app)]
     },
     async function (req, reply) {
-      const {email, password, locale} = req.body;
-      const user = await users.findOne({email});
-      const res = await pwd.verify(Buffer.from(password), user.hashedPassword.buffer);
+      const { password, locale } = req.body;
+      const email = req.body.email.toLowerCase();
+
+      const user = await users.findOne({ email });
+
+      let hashedPassword, res;
+      if (!user.hashedPassword) {
+        hashedPassword = await pwd.hash(Buffer.from(password));
+        res = await pwd.verify(Buffer.from(password), hashedPassword);
+      } else {
+        res = await pwd.verify(Buffer.from(password), user.hashedPassword.buffer);
+      }
 
       if (res === securePassword.INVALID_UNRECOGNIZED_HASH) {
         throw new Error("invalid unrecognized hash");
