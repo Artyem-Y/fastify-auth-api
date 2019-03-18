@@ -6,6 +6,7 @@ const Fastify = require("fastify");
 
 // Custom modules
 const AuthMongoJwt = require("../../plugins/auth/index");
+const EmailConfirmation = require("../../plugins/email-confirmation/index");
 
 const database = "tests";
 
@@ -79,6 +80,7 @@ function build(t) {
   // we use fastify-plugin so that all decorators are exposed for testing purposes, this is
   // different from the production setup
   app.register(AuthMongoJwt, config());
+  app.register(EmailConfirmation);
 
   // tear down our app after we are done
   t.tearDown(app.close.bind(app));

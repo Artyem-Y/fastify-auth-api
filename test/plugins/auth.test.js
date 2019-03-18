@@ -50,7 +50,7 @@ test("signup and login when email is confirmed", async t => {
     body: users.first
   });
 
-  t.deepEqual(res1.statusCode, 200);
+  t.equal(res1.statusCode, 200);
   t.match(JSON.parse(res1.body), { status: "ok" });
 
   const client = getClient();
@@ -68,7 +68,7 @@ test("signup and login when email is confirmed", async t => {
     }
   });
 
-  t.deepEqual(res2.statusCode, 200);
+  t.equal(res2.statusCode, 200);
   t.match(JSON.parse(res2.body), { status: "ok" });
 
   const res3 = await app.inject({
@@ -80,7 +80,7 @@ test("signup and login when email is confirmed", async t => {
     }
   });
 
-  t.deepEqual(res3.statusCode, 400);
+  t.equal(res3.statusCode, 400);
   t.match(JSON.parse(res3.body), {
     status: "not ok",
     message: "login data is incorrect"
@@ -96,7 +96,7 @@ test("signup and login when email is not confirmed", async t => {
     body: users.first
   });
 
-  t.deepEqual(res1.statusCode, 200);
+  t.equal(res1.statusCode, 200);
   t.match(JSON.parse(res1.body), { status: "ok" });
 
   const res2 = await app.inject({
@@ -108,7 +108,7 @@ test("signup and login when email is not confirmed", async t => {
     }
   });
 
-  t.deepEqual(res2.statusCode, 401);
+  t.equal(res2.statusCode, 401);
   t.match(JSON.parse(res2.body), {
     status: "not ok",
     message: "email is not confirmed"
@@ -123,7 +123,7 @@ test("signup and login when email is not confirmed", async t => {
     }
   });
 
-  t.deepEqual(res3.statusCode, 400);
+  t.equal(res3.statusCode, 400);
   t.match(JSON.parse(res3.body), {
     status: "not ok",
     message: "login data is incorrect"
@@ -144,7 +144,7 @@ test("signup without password", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -166,7 +166,7 @@ test("signup without email", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -188,7 +188,7 @@ test("signup without firstName", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -210,7 +210,7 @@ test("signup without lastName", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -232,7 +232,7 @@ test("signup without phone", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -255,7 +255,7 @@ test("login wrong credentials", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 200);
+  t.equal(res1.statusCode, 200);
   t.match(JSON.parse(res1.body), { status: "ok" });
 
   const res2 = await app.inject({
@@ -267,7 +267,7 @@ test("login wrong credentials", async t => {
     }
   });
 
-  t.deepEqual(res2.statusCode, 401);
+  t.equal(res2.statusCode, 401);
   t.match(JSON.parse(res2.body), { status: "not ok" });
 });
 
@@ -280,7 +280,7 @@ test("double signup", async t => {
     body: users.first
   });
 
-  t.deepEqual(res1.statusCode, 200);
+  t.equal(res1.statusCode, 200);
   t.match(JSON.parse(res1.body), { status: "ok" });
 
   const res2 = await app.inject({
@@ -289,7 +289,7 @@ test("double signup", async t => {
     body: users.first
   });
 
-  t.deepEqual(res2.statusCode, 422);
+  t.equal(res2.statusCode, 422);
   t.match(JSON.parse(res2.body), { status: "not ok" });
 });
 
@@ -309,7 +309,7 @@ test("signup and login when email is confirmed", async t => {
     .collection("users")
     .updateOne({ email: "test@test.com" }, { $set: { emailConfirmed: true } });
 
-  t.deepEqual(res1.statusCode, 200);
+  t.equal(res1.statusCode, 200);
   t.match(JSON.parse(res1.body), { status: "ok" });
 
   const res2 = await app.inject({
@@ -321,7 +321,7 @@ test("signup and login when email is confirmed", async t => {
     }
   });
 
-  t.deepEqual(res2.statusCode, 200);
+  t.equal(res2.statusCode, 200);
   const body2 = JSON.parse(res2.body);
   t.match(body2, { status: "ok" });
 
@@ -336,7 +336,7 @@ test("signup and login when email is confirmed", async t => {
     }
   });
 
-  t.deepEqual(res3.statusCode, 200);
+  t.equal(res3.statusCode, 200);
   t.match(JSON.parse(res3.body), {
     status: "ok",
     firstName: "test",
@@ -358,7 +358,7 @@ test("login without password", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -377,7 +377,7 @@ test("login without email", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     statusCode: 400,
     error: "Bad Request",
@@ -396,7 +396,7 @@ test("signup and login with fb when email is empty", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 400);
+  t.equal(res1.statusCode, 400);
   t.match(JSON.parse(res1.body), {
     status: "not ok",
     message: "email is empty"
@@ -415,7 +415,7 @@ test("signup and login with fb", async t => {
     }
   });
 
-  t.deepEqual(res1.statusCode, 200);
+  t.equal(res1.statusCode, 200);
   t.match(JSON.parse(res1.body), {
     message: "new user is created",
     status: "ok"
@@ -430,7 +430,7 @@ test("signup and login with fb", async t => {
     }
   });
 
-  t.deepEqual(res2.statusCode, 400);
+  t.equal(res2.statusCode, 400);
   t.match(JSON.parse(res2.body), {
     error: {
       code: 190,
@@ -448,7 +448,7 @@ test("signup and login with fb", async t => {
     }
   });
 
-  t.deepEqual(res3.statusCode, 400);
+  t.equal(res3.statusCode, 400);
   t.match(JSON.parse(res3.body), {
     error: {
       code: 190,
@@ -467,100 +467,9 @@ test("signup and login with fb", async t => {
     }
   });
 
-  t.deepEqual(res4.statusCode, 200);
+  t.equal(res4.statusCode, 200);
   t.match(JSON.parse(res4.body), {
     message: "login via fb",
     status: "ok"
-  });
-});
-
-test("email confirmation process", async t => {
-  const app = build(t);
-
-  const res1 = await app.inject({
-    url: "/signup",
-    method: "POST",
-    body: users.first
-  });
-
-  t.deepEqual(res1.statusCode, 200);
-  t.match(JSON.parse(res1.body), { status: "ok" });
-
-  const res2 = await app.inject({
-    url: "/email-confirmation",
-    method: "POST",
-    body: {
-      email: "test@test.com"
-    }
-  });
-
-  t.deepEqual(res2.statusCode, 200);
-  t.match(JSON.parse(res2.body), {
-    message: "verification code is created",
-    email: "test@test.com"
-  });
-
-  const res3 = await app.inject({
-    url: "/email-confirmation",
-    method: "POST",
-    body: {}
-  });
-
-  t.deepEqual(res3.statusCode, 400);
-  t.match(JSON.parse(res3.body), {
-    statusCode: 400,
-    error: "Bad Request",
-    message: "body should have required property 'email'"
-  });
-
-  const client = getClient();
-  const verificationCode = (await client
-    .db(database)
-    .collection("users")
-    .findOne({ email: "test@test.com" })).verificationCode;
-
-  const res4 = await app.inject({
-    url: "/confirm-email",
-    method: "POST",
-    body: {
-      email: "test@test.com",
-      code: verificationCode
-    }
-  });
-
-  t.deepEqual(res4.statusCode, 200);
-  t.match(JSON.parse(res4.body), {
-    message: "email is confirmed",
-    email: "test@test.com"
-  });
-
-  const res5 = await app.inject({
-    url: "/confirm-email",
-    method: "POST",
-    body: {
-      code: verificationCode
-    }
-  });
-
-  t.deepEqual(res5.statusCode, 400);
-  t.match(JSON.parse(res5.body), {
-    statusCode: 400,
-    error: "Bad Request",
-    message: "body should have required property 'email'"
-  });
-
-  const res6 = await app.inject({
-    url: "/confirm-email",
-    method: "POST",
-    body: {
-      email: "test@test.com",
-      code: 12345
-    }
-  });
-
-  t.deepEqual(res6.statusCode, 400);
-  t.match(JSON.parse(res6.body), {
-    email: "test@test.com",
-    message: "validation code is incorrect"
   });
 });

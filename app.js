@@ -8,6 +8,7 @@ const swagger = require("./config/swagger");
 
 //custom plugins
 const Authentication = require("./plugins/auth");
+const EmailConfirmation = require("./plugins/email-confirmation");
 
 fastify.register(require("fastify-swagger"), swagger.options);
 
@@ -22,6 +23,8 @@ fastify.register(Authentication, {
     forceClose: true
   }
 });
+
+fastify.register(EmailConfirmation, {});
 
 fastify.get(
   "/",
